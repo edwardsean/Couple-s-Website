@@ -15,7 +15,7 @@ import loginRoute from "./route/loginRoute.js";
 import mediaRoute from "./route/mediaRoute.js";
 import gameRoute from "./route/gameRoute.js";
 
-require('dotenv').config();
+import 'dotenv/config';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -117,6 +117,8 @@ app.get("/game", (req, res) => {
 });
 
 
-app.listen(process.env.PORT || port, () => {
-    console.log(`Server running`);
-});
+// app.listen(process.env.PORT || port, () => {
+//     console.log(`Server running`);
+// });
+
+export default app;
