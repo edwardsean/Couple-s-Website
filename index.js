@@ -24,20 +24,21 @@ const port = 3000;
 
 
 //database
+// const db = new pg.Client({
+//     user: "postgres",
+//     host: "localhost",
+//     database: "Febis",
+//     password: "SamsungEd123.",
+//     port: 5432,
+//   });
 const db = new pg.Client({
     user: "postgres",
-    host: "localhost",
-    database: "Febis",
-    password: "SamsungEd123.",
+    host: "db.xlnnybyfglofltjhmyhh.supabase.co", 
+    database: "postgres", 
+    password: "SamsungEd123.", 
     port: 5432,
+    ssl: { rejectUnauthorized: false } // Required for Supabase
   });
-// const db = new pg.Client({
-//     user: "if0_38457440",
-//     host: "sql210.infinityfree.com",
-//     database: "if0_38457440_febidatabase",
-//     password: "SamsungEd123"
-//     // port: 5432,
-//   });
 
 db.connect();
 export {db} //export to routes
