@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style/addRiddle.css">
+</head>
+<body>
+        <%- include("./header.ejs")%>
+        <form action="/riddles/submitRiddle" method = "POST" class = "container">
+    
+            <h1>Hadoh riddle apa lagi :/</h1>
+           
+            <div class="input-wrap">
+                <div id="riddle-text">
+                    <h3>Riddle: </h1>
+                    <input type="text" name = "riddle" id = "riddle-input" placeholder = "Jangan yang susah laa" autocomplete = "off">
+                </div>
+                <div id="answer-text">
+                    <h3>Answer: </h3>
+                    <input type="text" name = "answer" id = "answer-input" placeholder = "Yang bener luu" autocomplete= "off">
+                </div>
+            </div>
+
+            <button type="submit">SUBMIT</button>
+        </form>
+
+        
+    
+    
+</body>
+</html>

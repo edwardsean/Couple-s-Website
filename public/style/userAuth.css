@@ -1,0 +1,111 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+body {
+  background-image: url(../images/background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  max-width: 40%;
+  height: 300px;
+  margin: 15% auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding-top: 10px;
+}
+
+.container a {
+  align-self: center;
+}
+
+h1 {
+  text-align: center;
+}
+
+.game-instructions {
+  font-family: "Press Start 2P", monospace;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  line-height: 1.5;
+}
+
+.game-instructions span {
+  display: inline-block;
+}
+
+.game-instructions span span {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.game-instructions span span:hover {
+  transform: translateY(-10px);
+}
+
+.input-wrap {
+  width: 100%;
+  text-align: center;
+}
+
+input {
+  text-align: left;
+  width: 80%;
+  margin: 10px auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  font-weight: 800;
+  letter-spacing: 2px;
+  font-size: large;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #ffca00;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ffd500;
+}
+
+#result {
+  text-align: center;
+  font-size: 24px;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  20%,
+  80% {
+    margin-left: -12px;
+    margin-right: -12px;
+  }
+  40%,
+  60% {
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+}
+
+form .shake {
+  animation: shake 0.3s ease-in-out;
+}

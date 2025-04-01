@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style/games/guessPic.css">
+</head>
+<body>
+    <div class="container <%= endgame ? 'endgame' : '' %>">
+        <a href="/game?selection=game" id = "back-button">
+            <span>&times;</span>
+        </a>
+        <% if(!endgame && !locals.scoreBoard) { %>
+        <div id="countdown-overlay">
+            <div id="countdown-text">Ready?</div>
+        </div>
+
+        
+        <div id = "game-start-div">
+            
+            <h1 class = "hidden">Guess the Picture</h1>
+            <div id="game-container" class = "hidden">
+                <img id = "picture" src="" alt="">
+                <canvas id="mask" width="800" height="500"></canvas>
+            </div>
+            <p id="timer" class = "hidden">Time Left: 60</p>
+            <div id="choices" class = "hidden">
+                
+                <button class="choice" id = "option_1"></button>
+                <button class="choice" id = "option_2"></button>
+                <button class="choice" id = "option_3"></button>
+                <button class="choice" id = "option_4"></button>
+                <input type="hidden" value = "" id = "correct_answer">
+            </div>
+        </div>
+
+        <input type="hidden" value = "<%= user%>" id = "userPlaying">
+        <% } else { %>
+            <a href="/game/reset?userPlaying=<%= user%>&gameName=GUESS%20THE%20PIC" id="reset-button">
+                <span>↻</span>
+            </a>
+            <div id="checklist-container" class = "<%= endgame ? 'visible' : 'hidden' %>">
+                <div id="check-list-title">
+                    <h1>ScoreBoard</h1>
+                </div>
+                <div id="check-list-scrollbox">
+                    <ul>
+                        <% if(locals.scoreBoard && locals.scoreBoard.length > 0) { %>
+                            <% scoreBoard.forEach((score) => { %>
+                                <li>
+                                    <h3><%= score.username %> <span><%= score.gamescore %></span></h3>
+                                </li>
+                            <% }); %>
+                        <% } else { %>
+                            <h2>No users available</h2>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        <% } %>
+       
+    </div>
+  
+    <script src = "/js/game/guessThePic.js" charset= "UTF-8"></script>
+    <script>
+        console.log("endGame:", <%= locals.endgame %>, "scoreBoard:", <%= JSON.stringify(locals.scoreBoard) %>);
+    </script>
+</body>
+</html>

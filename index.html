@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Febi and Edu</title>
+    <link rel="stylesheet" href="../style/home.css">
+</head>
+<body>
+    <main>
+        <div class = "container">
+            <div class = "middle-box">
+                <h1 id = "title">febs & edu</h1>
+                <h3 id = "daily-password" class = "first">Today's Riddle</h3>
+                <form action="/enter" method = "POST" id = "password-form">
+                    <div class = "field password">
+                        <div class = "input-area">
+                            <input type="text" name = "password" id = "password-input" placeholder="HAYO APA YO" autocomplete="off">
+                            <input type="hidden" name= "riddle" id="hidden-riddle">
+                            <button type = "submit">
+                                <i class="fa-solid fa-heart"></i> 
+                            </button>
+                        </div>   
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </main>
+
+    <script src = "/js/home.js" charset= "UTF-8"></script>
+    <script src = "/index.js" charset= "UTF-8"></script>    
+</body>
+</html>

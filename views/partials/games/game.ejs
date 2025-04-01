@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Choices</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style/game.css">
+
+</head>
+<body>
+
+    <%- include("../header.ejs") %>
+    
+
+    <div class="container">
+        <% if(locals.game_slide) { %>
+            <h2>Games</h2>
+        <div class="game-slide">
+            <% games.forEach((game) => { %>
+                <div class="game-container">
+                    <h1><%= game.game_name %></h1>
+                    <div class="game-item <%= game.game_name %>" onclick="redirectToGame('<%= game.game_name %>', '<%= game.game_description %>')">
+                        <img id="GameThumbnail" src="/images/GuessThePic.png" alt="Expanded Image">
+                    </div>
+                </div>
+            <% }); %>
+            <button class="nav-btn left">&lt;</button>
+            <button class="nav-btn right">&gt;</button>
+        </div>
+        <% } else { %> 
+            <h2>Edit Games</h2>
+            <div class="game-slide">
+                <% games.forEach((game) => { %>
+                    <div class="game-container">
+                        <h1><%= game.game_name %></h1>
+                        <div class="game-item <%= game.game_name %>" onclick="redirectToEdit('<%= game.game_name%>')">
+                            <img id="GameThumbnail" src="/images/GuessThePic.png" alt="Expanded Image">
+                        </div>
+                    </div>
+                <% }); %>
+                <button class="nav-btn left">&lt;</button>
+                <button class="nav-btn right">&gt;</button>
+            </div>
+
+            <% } %>
+
+    </div>
+   
+      
+
+
+
+
+    <script>
+        function redirectToGame(gameName, gameDescription) {
+            const url = `/game/${gameName}?gameDesc=${encodeURIComponent(gameDescription)}`;
+            window.location.href = url;
+        }
+
+        function redirectToEdit(gameName) {
+            const url = `/game/Edit/${gameName}`;
+            window.location.href = url;
+        }
+        
+    </script>
+    <script src = "/index.js" charset= "UTF-8"></script>
+    </body>
+    </html>

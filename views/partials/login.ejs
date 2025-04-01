@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style/login.css">
+    
+</head>
+<body>
+
+    <%- include("./header.ejs")%>
+    
+    <% if(locals.login) { %>
+        <form action="/login/LogIn" method = "POST" class = "container" id = "logInForm">
+    
+            <h1>Cie mau nulis yee</h1>
+           
+            <div class="input-wrap">
+                <div id="username-text-login">
+                    <h3>User: </h1>
+                    <input type="text" name = "username" id = "username-input-login" placeholder = "What is your name" autocomplete = "off" required>
+                </div>
+                <div id="password-text-login">
+                    <h3>Password: </h3>
+                    <input type="password" name = "password" id = "password-input-login" placeholder = "Password" autocomplete= "off" required>
+                </div>
+            </div>
+
+            <button type="submit">Log in</button>
+            <a href="/login/SignIn?referrer=/login"> Sign In </a>
+            
+        </form>
+    <% } %>
+
+    <% if(locals.signIn) { %>
+        <form action="/login/Register" method = "POST" class = "container" id = "signInForm">
+    
+            <h1>Who are you?</h1>
+           
+            <div class="input-wrap">
+                <div id="username-text-signin">
+                    <h3>Name: </h1>
+                    <input type="text" name = "username" id = "username-input-signin" placeholder = "What is your name" autocomplete = "off" required>
+                </div>
+                <div id="password-text-signin">
+                    <h3>Password: </h3>
+                    <input type="password" name = "password" id = "password-input-signin" placeholder = "Password" autocomplete= "off" required>
+                </div>
+            </div>
+
+            <button type="submit">Sign In</button>
+        </form>
+    <% } %>
+
+        
+    <script>
+        const signInform = document.getElementById("signInForm");
+        if(signInform) {
+            const signInPass = document.getElementById("password-input-signin"),
+            signInUsername = document.getElementById("username-input-signin"),
+            signInPassBox = document.getElementById("password-text-signin"),
+            signInUsernameBox = document.getElementById("username-text-signin");
+
+            const referrer = "<%= typeof referrer !== 'undefined' ? referrer : '' %>";
+            console.log("OI PRINT REFERRER: ", referrer);
+            signInform.onsubmit = async (e) => {
+                e.preventDefault();
+
+                
+                const response = await fetch("/login/Register", { 
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        signInPassword: signInPass.value,
+                        signInUser : signInUsername.value,
+                        referrer : referrer,
+                    }),
+                });
+
+                const result = await response.json();
+                console.log(result);
+                if (result.success) {
+               
+                    window.location.href = result.referrer; //to game auth
+
+                } else {
+                    signInPassBox.classList.add("shake");
+                    signInPassBox.classList.add("invalid");
+                    signInUsernameBox.classList.add("shake");
+                    signInUsernameBox.classList.add("invalid");
+
+                    setTimeout(() => {
+                        signInPassBox.classList.remove("shake");
+                        signInPassBox.classList.remove("invalid");
+                        signInUsernameBox.classList.remove("shake");
+                        signInUsernameBox.classList.remove("invalid")
+                    }, 500);
+                }
+            };
+        }
+        
+        //login
+        const logInform = document.getElementById("logInForm");
+        if(logInform) {
+            const logInPass = document.getElementById("password-input-login"),
+            logInUsername = document.getElementById("username-input-login"),
+            logInPassBox = document.getElementById("password-text-login"),
+            logInUsernameBox = document.getElementById("username-text-login");
+
+            logInform.onsubmit = async (e) => {
+                e.preventDefault();
+                console.log("Server", logInPass.value, logInUsername.value)
+                const response = await fetch("/login/LogIn", { 
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        logInPassword: logInPass.value,
+                        logInUser : logInUsername.value,
+                    }),
+                });
+
+                const result = await response.json();
+                console.log(result);
+                if (result.success) {
+                    window.location.href = `/diary`; 
+                    
+                } else {
+                    logInPassBox.classList.add("shake");
+                    logInPassBox.classList.add("invalid");
+                    logInUsernameBox.classList.add("shake");
+                    logInUsernameBox.classList.add("invalid");
+
+                    setTimeout(() => {
+                        logInPassBox.classList.remove("shake");
+                        logInPassBox.classList.remove("invalid");
+                        logInUsernameBox.classList.remove("shake");
+                        logInUsernameBox.classList.remove("invalid")
+                    }, 500);
+                }
+            };
+        }
+        
+    </script>
+    
+    
+</body>
+</html>

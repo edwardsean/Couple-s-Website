@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style/menu.css">
+</head>
+<body>
+
+    <%- include("../header.ejs") %>
+    <div class = "container">
+        <div class = "choice" onclick = "goToGame()">
+            <h2>Games</h2>
+            <div class = "hover-text">Play Games</div>
+        </div>
+        
+        <div class = "choice" onclick = "goToEdit()">
+            <h2>Edit Games</h2>
+            <div class = "hover-text">Add content varieties on different games</div>
+        </div>
+    </div>
+    
+    <script>
+        function goToGame() {
+            const url = "/game?selection=game";
+            window.location.href = url;
+        }
+
+        function goToEdit() {
+            const url = "/game?selection=edit";
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>

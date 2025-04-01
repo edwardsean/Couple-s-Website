@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style/userAuth.css">
+    
+</head>
+<body>
+    <%- include("../header.ejs")%>
+
+
+    <!-- <form action="/game/EnterGame?gameName=<%= gameName %>&userPlaying=<%= %>" method="POST" class="container" id="logInForm">
+    
+            <h3 class="game-instructions" id="game-description">Instructions: <%= gameDescription %></h3>
+            
+            <div class="input-wrap">
+                <div id="username-text-login">
+                    <h3>User: </h1>
+                    <select name="users" id="username-input-login">
+                        <%  users.forEach((user) => { %>
+                            <option value = "<%= user.name%>" name = "userPlaying"> <%=  user.name%></option>
+                       <% });%>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit">Start</button>
+            <a href="/login/SignIn?referrer=/game?<%= gameName%>"> Sign In </a>
+            
+    </form> -->
+    <form id="logInForm" class="container" method="POST">
+        <h3 class="game-instructions" id="game-description">Instructions: <%= gameDescription %></h3>
+        <div class="input-wrap">
+            <div id="username-text-login">
+                <h3>User: </h3>
+                <select name="userPlaying" id="username-input-login">
+                    <% users.forEach((user) => { %>
+                        <option value="<%= user.name %>"><%= user.name %></option>
+                    <% }); %>
+                </select>
+            </div>
+        </div>
+        <button type="submit">Start</button>
+        <a href="/login/SignIn?referrer=/game?<%= gameName %>">Sign In</a>
+    </form>
+
+
+  
+        
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("logInForm");
+        const select = document.getElementById("username-input-login");
+
+        select.addEventListener("change", () => {
+            const selectedUser = select.value;
+            const gameName = "<%= gameName %>";
+            form.action = `/game/EnterGame?gameName=${gameName}&userPlaying=${selectedUser}`;
+        });
+        
+        const initialUser = select.value;
+        const gameName = "<%= gameName %>";
+        form.action = `/game/EnterGame?gameName=${gameName}&userPlaying=${initialUser}`;
+    });
+
+    const gameDescriptionElement = document.getElementById('game-description');
+    const gameDescriptionText = gameDescriptionElement.textContent;
+
+
+    gameDescriptionElement.textContent = '';
+    const words = gameDescriptionText.split(' ');
+
+
+    words.forEach((word, index) => {
+        const wordSpan = document.createElement('span'); 
+        wordSpan.style.display = 'inline-block'; 
+        wordSpan.style.whiteSpace = 'nowrap'; 
+
+        word.split('').forEach((letter) => {
+            const letterSpan = document.createElement('span');
+            letterSpan.textContent = letter;
+            letterSpan.style.display = 'inline-block';
+            wordSpan.appendChild(letterSpan);
+        });
+
+        gameDescriptionElement.appendChild(wordSpan);
+
+        if (index < words.length - 1) {
+            const spaceSpan = document.createElement('span');
+            spaceSpan.textContent = ' ';
+            spaceSpan.style.display = 'inline-block';
+            spaceSpan.style.width = '0.5em'; 
+            gameDescriptionElement.appendChild(spaceSpan);
+        }
+    });
+</script>
+    
+</body>
+</html>
