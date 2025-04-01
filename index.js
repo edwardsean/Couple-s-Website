@@ -15,6 +15,8 @@ import loginRoute from "./route/loginRoute.js";
 import mediaRoute from "./route/mediaRoute.js";
 import gameRoute from "./route/gameRoute.js";
 
+require('dotenv').config();
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 
@@ -31,13 +33,9 @@ const port = 3000;
 //     password: "SamsungEd123.",
 //     port: 5432,
 //   });
-const db = new pg.Client({
-    user: "postgres",
-    host: "db.xlnnybyfglofltjhmyhh.supabase.co", 
-    database: "postgres", 
-    password: "SamsungEd123.", 
-    port: 5432,
-    ssl: { rejectUnauthorized: false } // Required for Supabase
+const db = new pg.Pool({
+    connectionString: process.env.SUPABASE_DB_URL,
+    ssl: { rejectUnauthorized: false }
   });
 
 db.connect();
@@ -67,12 +65,13 @@ app.use(
             tableName: 'user_sessions',
             createTableIfMissing: true
         }),
-        secret: "SamsungEd123.", 
+        secret: process.env.SESSION_SECRET,  
         resave: false,
         saveUninitialized: false,
         cookie: { 
-            secure: false, 
-            maxAge: 30 * 24 * 60 * 60 * 1000 
+            secure: process.env.NODE_ENV === 'production', 
+            maxAge: 30 * 24 * 60 * 60 * 1000,
+            sameSite: 'lax'
         },
     })
 );
@@ -118,8 +117,6 @@ app.get("/game", (req, res) => {
 });
 
 
-
-
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
-  });
+app.listen(process.env.PORT || port, () => {
+    console.log(`Server running`);
+});

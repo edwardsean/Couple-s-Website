@@ -1,23 +1,32 @@
 {
-  "name": "febi's",
+  "name": "febis",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "vercel-build": "npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Febi's Travel App with Supabase + Vercel",
   "dependencies": {
+    "@supabase/supabase-js": "^2.39.8",
+    "@supabase/storage-js": "^2.7.1",
     "axios": "^1.7.9",
     "body-parser": "^1.20.3",
     "connect-pg-simple": "^10.0.0",
+    "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
     "express-session": "^1.18.1",
     "multer": "^1.4.5-lts.1",
     "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
   }
 }
